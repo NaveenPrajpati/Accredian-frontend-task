@@ -1,5 +1,9 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { Dots } from "react-activity";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import "react-activity/dist/library.css";
 
 const Form = () => {
   const {
@@ -7,13 +11,26 @@ const Form = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  const [loading, setLoading] = useState(false);
   const onSubmit = (data) => {
     console.log(data);
+    setLoading(true);
+    axios
+      .post("http://localhost:4000/api/referral", data)
+      .then((res) => {
+        toast.success(res.data.message);
+        setLoading(false);
+        // console.log(res.data.data);
+      })
+      .catch((err) => {
+        toast.error(err.error);
+        console.log(err.error);
+        setLoading(false);
+      });
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 ">
       <div>
         <label className="block text-gray-700">Your Name</label>
         <input
@@ -58,11 +75,23 @@ const Form = () => {
           <span className="text-red-500">Friend's email is required</span>
         )}
       </div>
+      <div>
+        <label className="block text-gray-700">Course</label>
+        <input
+          type="text"
+          {...register("course", { required: true })}
+          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 p-2"
+        />
+        {errors.course && (
+          <span className="text-red-500">Course is required</span>
+        )}
+      </div>
       <button
         type="submit"
+        disabled={loading}
         className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-full"
       >
-        Submit
+        {loading ? <Dots /> : "Submit"}
       </button>
     </form>
   );

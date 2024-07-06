@@ -8,8 +8,8 @@ const HeroSection = () => {
   const handleClose = () => setOpen(false);
 
   return (
-    <div className="bg-blue-50 text-black shadow-xl flex justify-center items-center container mx-auto rounded-xl h-[600px] mt-20">
-      <div className=" w-1/2 pl-20">
+    <div className="bg-blue-50 text-black shadow-xl flex flex-col md:flex-row justify-center items-center container mx-auto rounded-xl md:h-[600px] mt-5 p-8">
+      <div className=" sm:w-1/2 ">
         <h2 className="text-[88px] font-bold mb-4 text-start leading-[88px]">
           Let's Learn <br />& Earn
         </h2>
@@ -31,11 +31,11 @@ const HeroSection = () => {
         </button>
         <ReferModal open={open} onClose={handleClose} />
       </div>
-      <div className="  w-1/2 h-full">
+      <div className="  sm:w-1/2 z-0">
         <img
           src={require("../assets/herro.png")}
           alt=""
-          className="h-full object-cover"
+          className=" scale-110"
         />
       </div>
     </div>
