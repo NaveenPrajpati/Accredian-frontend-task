@@ -3,7 +3,10 @@ import React, { useState } from "react";
 import { Dots } from "react-activity";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import "react-activity/dist/library.css";
+
+const BASE_URL =
+  "https://accredian-backend-task-tx9w.onrender.com/api/referral";
+// const BASE_URL="http://localhost:4000/api/referral"
 
 const Form = () => {
   const {
@@ -16,15 +19,16 @@ const Form = () => {
     console.log(data);
     setLoading(true);
     axios
-      .post("http://localhost:4000/api/referral", data)
+      .post(BASE_URL, data)
       .then((res) => {
         toast.success(res.data.message);
         setLoading(false);
-        // console.log(res.data.data);
+
+        console.log(res.data);
       })
       .catch((err) => {
-        toast.error(err.error);
-        console.log(err.error);
+        toast.error(err.response.data.error);
+        console.log(err.response.data.error);
         setLoading(false);
       });
   };
