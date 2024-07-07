@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   FaHome,
   FaUsers,
@@ -22,13 +22,6 @@ const Sidebar = () => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* <div className="flex items-center justify-center h-16 w-full">
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/2111/2111432.png"
-          className="h-8 w-8"
-          alt="Logo"
-        />
-      </div> */}
       <nav className="flex-1 flex flex-col items-center justify-center space-y-4 mt-10">
         <div className="group w-full">
           <div className="w-full flex items-center justify-start  group-hover:justify-center p-2">

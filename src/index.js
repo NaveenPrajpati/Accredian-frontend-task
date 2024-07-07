@@ -5,11 +5,14 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Toaster } from "react-hot-toast";
 import "react-activity/dist/library.css";
+import Context from "./context/Context";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
-    <Toaster />
+    <Context>
+      <App />
+      <Toaster />
+    </Context>
   </React.StrictMode>
 );
 

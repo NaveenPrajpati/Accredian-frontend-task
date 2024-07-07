@@ -1,12 +1,13 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Dots } from "react-activity";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { MyContext } from "../context/Context";
 
 const BASE_URL =
   "https://accredian-backend-task-tx9w.onrender.com/api/referral";
-// const BASE_URL="http://localhost:4000/api/referral"
+// const BASE_URL = "http://localhost:4000/api/referral";
 
 const Form = () => {
   const {
@@ -14,6 +15,9 @@ const Form = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const { open, setOpen } = useContext(MyContext);
+
   const [loading, setLoading] = useState(false);
   const onSubmit = (data) => {
     console.log(data);
@@ -23,7 +27,7 @@ const Form = () => {
       .then((res) => {
         toast.success(res.data.message);
         setLoading(false);
-
+        setOpen(false);
         console.log(res.data);
       })
       .catch((err) => {

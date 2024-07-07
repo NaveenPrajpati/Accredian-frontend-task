@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ReferModal from "./ReferModal";
+import { MyContext } from "../context/Context";
 
 const HeroSection = () => {
-  const [open, setOpen] = useState(false);
+  const { open, setOpen } = useContext(MyContext);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
